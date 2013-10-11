@@ -3,7 +3,7 @@
 <head>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
 <script type="text/javascript">
-$(document).ready(function() {
+window.onload=function() {
 	
 	if(!("WebSocket" in window)){
 		$('#chatLog, input, button, #examples').fadeOut("fast");	
@@ -14,10 +14,11 @@ $(document).ready(function() {
 		//The user has WebSockets
 	
 	connect();
+};
 		
 	function connect(){
 			var socket;
-			var host = "ws://localhost:8080/";
+			var host = "ws://localhost:8787/socket/server/startDaemon.php";
 			
 			try{
 				var socket = new WebSocket(host);
@@ -51,7 +52,7 @@ $(document).ready(function() {
 				
 				try{
 					socket.send(text);
-					message('<p class="event">Sent: '+text)
+					message('<p class="event">Sent: '+text);
 				} catch(exception){
 					message('<p class="warning">');
 				}
@@ -72,12 +73,8 @@ $(document).ready(function() {
 				socket.close();
 			});
 
-		}
+		};
 		
-		
-	}//End connect()
-		
-});
 </script>
 <meta charset=utf-8 />
 <style type="text/css">
